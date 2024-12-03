@@ -1,6 +1,6 @@
 # Advent of Code 2024 🎄
 
-Advent of Code is an Advent calendar of small programming puzzles for a variety of skill levels. I'm storing my solutions here for fun.
+Advent of Code is an [advent calendar of small programming puzzles](https://adventofcode.com/) for each day in December. I'm storing this years solutions here for fun and holiday cheer. 🎅🏻
 
 ## Prerequisites 🧰
 

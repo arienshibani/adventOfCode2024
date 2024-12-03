@@ -34,7 +34,7 @@ const allEitherIncreasingOrDecreasing = (line) => {
     return isIncreasing || isDecreasing;
 }
 
-// Main logic
+
 let safeReports = 0;
 const lines = file.trim().split("\n");
 

@@ -1,39 +1,58 @@
-var fs = require("fs");
-
 // Read the input file
-const file = fs.readFileSync("./input.tsv", "utf8");
-
+const fs = require("fs");
+const file = fs.readFileSync("./input.txt", "utf8");
 let distance = 0;
-let leftList = [];
-let rightList = [];
 
-// Parse left + right lists
-for (const line of file.split("\n")) {
-    leftList.push(line.split("   ")[0]);
-    rightList.push(line.split("   ")[1]);
-}
+
+/**
+ * Part 1: Distance between the two lists
+ */
+
+//Split the .txt file into two lists and sort them.
+const [listOne, listTwo] = file.split('\n').reduce((acc, line) => {
+    const [left, right] = line.split('   ');
+    acc[0].push(Number(left));
+    acc[1].push(Number(right));
+    return acc;
+}, [[], []]).map(list => list.sort((a, b) => a - b));
 
 // Sort left + right lists
-leftList.sort((a, b) => a - b);
-rightList.sort((a, b) => a - b);
+listOne.sort((a, b) => a - b);
+listTwo.sort((a, b) => a - b);
 
 // Calculate distance
-for (let i = 0; i < leftList.length; i++) {
-    distance += Math.abs(leftList[i] - rightList[i]);
+for (let i = 0; i < listOne.length; i++) {
+    distance += Math.abs(listOne[i] - listTwo[i]);
 }
-console.log("Distance:", distance);
+
+
+/**
+ * Part 2: Similarity between the two lists
+ */
 
 let similarity = 0;
 // Count the occurance of each value in the left list, in the right list
-const leftCount = [];
+const listOneCount = [];
 
-for (const value of leftList) {
-    leftCount.push(value * rightList.filter((number) => number === value).length);
+// Create a frequency map.
+const rightFreq = listTwo.reduce((acc, num) => {
+    acc[num] = (acc[num] || 0) + 1;
+    return acc;
+}, {});
+
+for (const value of listOne) {
+    listOneCount.push(value * (rightFreq[value] || 0));
 }
 
-// Add up all numbers in the leftCount array
-for (const value of leftCount) {
+// Add up all numbers in the listOneCount array
+for (const value of listOneCount) {
     similarity += value;
 }
 
-console.log("Similarity:", similarity);
+
+// Output the answers to both part 1 and part 2 in the console with headers.
+console.table([
+    { Metric: "Part 1: Distance", Value: distance },
+    { Metric: "Part 2: Similarity", Value: similarity }
+]);
+

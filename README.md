@@ -4,7 +4,7 @@ Advent of Code is an [advent calendar of small programming puzzles](https://adve
 
 ## Prerequisites 🧰
 
-- [Node.js](https://nodejs.org/en) installed on your system.
+- [Node.js](https://nodejs.org/en) installed on your system. I've decided to solve everything using JavaScript because I hate myself.
 
 ## Project Structure 📂
 
